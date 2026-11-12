@@ -1,0 +1,707 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Bitácora educativa de Alan Ballesteros sobre herramientas digitales para comunicar, colaborar y aprender en el ICC.">
+  <meta name="theme-color" content="#0b1430">
+  <title>Aula en Red — Alan Ballesteros | ICC</title>
+  <style>
+:root {
+  color-scheme: light;
+  --night: #0b1430;
+  --night-2: #14244d;
+  --ink: #101d3a;
+  --ink-soft: #53617b;
+  --paper: #f3f6fc;
+  --paper-deep: #e8eefb;
+  --white: #ffffff;
+  --violet: #6558ef;
+  --violet-deep: #4737c5;
+  --aqua: #42e0c0;
+  --coral: #ff947d;
+  --lime: #d3f08d;
+  --line: #dce4f2;
+  --shadow: 0 22px 60px rgba(17, 30, 68, .13);
+  --max: 1180px;
+  --sans: "Segoe UI", "Aptos", Arial, sans-serif;
+  --display: "Segoe UI Variable Display", "Segoe UI", Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 6% 18%, rgba(101, 88, 239, .075), transparent 26rem),
+    radial-gradient(circle at 96% 62%, rgba(66, 224, 192, .075), transparent 25rem),
+    var(--paper);
+  font: 400 16px/1.65 var(--sans);
+  text-rendering: optimizeLegibility;
+}
+img, svg { max-width: 100%; }
+a { color: inherit; }
+button, input { font: inherit; }
+a:focus-visible, button:focus-visible, input:focus-visible {
+  outline: 3px solid var(--coral);
+  outline-offset: 4px;
+}
+.shell { width: min(calc(100% - 48px), var(--max)); margin-inline: auto; }
+.skip-link {
+  position: absolute; left: -9999px; top: 0; z-index: 2000;
+  padding: .75rem 1rem; border-radius: 0 0 12px 12px;
+  color: var(--night); background: var(--lime); font-weight: 800;
+}
+.skip-link:focus { left: 1rem; top: 0; }
+
+/* Firma visual: una órbita abierta con tres nodos conectados. */
+.topbar {
+  position: sticky; top: 0; z-index: 1000;
+  color: #f6f8ff;
+  background: rgba(11, 20, 48, .93);
+  border-bottom: 1px solid rgba(226, 236, 255, .12);
+  backdrop-filter: blur(18px);
+}
+.topbar-inner {
+  min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 2rem;
+}
+.brand {
+  display: inline-flex; align-items: center; gap: .72rem;
+  color: #f6f8ff; text-decoration: none; font-size: .84rem; font-weight: 850; letter-spacing: .12em;
+}
+.brand-mark {
+  position: relative; display: grid; place-items: center; width: 40px; height: 40px;
+  overflow: hidden; border: 1px solid rgba(66, 224, 192, .65); border-radius: 14px 14px 14px 5px;
+  color: var(--night); background: linear-gradient(135deg, var(--aqua), var(--lime));
+  font: 900 1.1rem/1 var(--display); box-shadow: 0 0 26px rgba(66, 224, 192, .18);
+}
+.brand-mark::after { content: ""; position: absolute; width: 12px; height: 12px; right: -3px; bottom: -3px; border: 2px solid var(--night); border-radius: 50%; }
+.nav { display: flex; align-items: center; gap: .45rem; font-size: .8rem; font-weight: 700; }
+.nav a {
+  position: relative; padding: .62rem .82rem; color: #d2dcf2; text-decoration: none;
+  transition: color .2s ease, background .2s ease;
+}
+.nav a:not(.nav-pill)::after {
+  content: ""; position: absolute; left: .82rem; right: .82rem; bottom: .34rem; height: 2px;
+  background: var(--aqua); transform: scaleX(0); transform-origin: left; transition: transform .2s ease;
+}
+.nav a:hover, .nav a[aria-current="location"] { color: #fff; }
+.nav a:hover::after, .nav a[aria-current="location"]::after { transform: scaleX(1); }
+.nav .nav-pill {
+  margin-left: .45rem; border: 1px solid rgba(66, 224, 192, .75); border-radius: 999px;
+  color: var(--night); background: var(--aqua); transition: transform .2s ease, box-shadow .2s ease;
+}
+.nav .nav-pill:hover { transform: translateY(-2px); box-shadow: 0 7px 20px rgba(66, 224, 192, .22); }
+.menu-toggle {
+  display: none; align-items: center; gap: .55rem; border: 1px solid rgba(255,255,255,.28); border-radius: 999px;
+  padding: .55rem .85rem; color: #fff; background: transparent; cursor: pointer; font-size: .8rem; font-weight: 750;
+}
+.menu-icon, .menu-icon::before, .menu-icon::after { display: block; width: 17px; height: 2px; border-radius: 2px; background: currentColor; }
+.menu-icon { position: relative; }
+.menu-icon::before, .menu-icon::after { content: ""; position: absolute; left: 0; }
+.menu-icon::before { top: -5px; }
+.menu-icon::after { top: 5px; }
+.reading-progress { position: absolute; inset: auto 0 0; height: 3px; overflow: hidden; background: rgba(255,255,255,.1); }
+.reading-progress span { display: block; width: 100%; height: 100%; background: linear-gradient(90deg, var(--violet), var(--aqua), var(--lime)); transform: scaleX(0); transform-origin: left; }
+
+.hero {
+  position: relative; isolation: isolate; overflow: hidden; padding: 5.5rem 0 2.1rem;
+  color: #f7f9ff; background: linear-gradient(120deg, #09132d 0%, #13234b 54%, #243271 100%);
+}
+.hero::before, .hero::after { content: ""; position: absolute; z-index: -1; pointer-events: none; }
+.hero::before {
+  inset: -14rem -8rem auto auto; width: min(60vw, 760px); aspect-ratio: 1; border-radius: 50%;
+  background: radial-gradient(circle at 38% 42%, rgba(66,224,192,.2), transparent 34%), radial-gradient(circle at 58% 58%, rgba(101,88,239,.35), transparent 62%);
+  filter: blur(15px);
+}
+.hero::after {
+  inset: 0; opacity: .19;
+  background-image: linear-gradient(rgba(208,224,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(208,224,255,.1) 1px, transparent 1px);
+  background-size: 62px 62px; mask-image: linear-gradient(90deg, transparent, #000 60%, transparent);
+}
+.hero-grid { position: relative; display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(300px, .88fr); align-items: center; gap: 3.3rem; }
+.eyebrow {
+  display: inline-flex; align-items: center; gap: .6rem; margin: 0 0 1.25rem; padding: .48rem .76rem;
+  border: 1px solid rgba(66,224,192,.35); border-radius: 999px; color: #bff8e9;
+  background: rgba(66,224,192,.08); font-size: .69rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+}
+.eyebrow::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--aqua); box-shadow: 0 0 13px var(--aqua); }
+h1, h2, h3, p { margin-top: 0; }
+h1 { max-width: 750px; margin-bottom: 1.2rem; color: #f8faff; font: 800 clamp(3.8rem, 9vw, 7.6rem)/.9 var(--display); letter-spacing: -.085em; }
+h1 em {
+  color: var(--aqua); font-style: normal;
+  background: linear-gradient(90deg, var(--aqua) 3%, var(--lime) 75%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.hero-copy { max-width: 620px; margin-bottom: 1.7rem; color: #d7e0f5; font-size: clamp(1rem, 1.5vw, 1.17rem); }
+.hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .8rem; }
+.button { display: inline-flex; align-items: center; justify-content: center; gap: .65rem; min-height: 48px; padding: .75rem 1.08rem; border-radius: 14px; font-size: .83rem; font-weight: 800; text-decoration: none; transition: transform .2s ease, box-shadow .2s ease, background .2s ease; }
+.button:hover { transform: translateY(-3px); }
+.button-primary { color: var(--night); background: linear-gradient(100deg, var(--aqua), var(--lime)); box-shadow: 0 12px 28px rgba(66,224,192,.18); }
+.button-primary:hover { box-shadow: 0 16px 35px rgba(66,224,192,.3); }
+.button-link { border: 1px solid rgba(255,255,255,.2); color: #eef2ff; background: rgba(255,255,255,.05); }
+.button-link:hover { background: rgba(255,255,255,.12); }
+.hero-art { position: relative; min-height: 390px; display: grid; place-items: center; perspective: 1000px; }
+.hero-art::before, .hero-art::after { content: ""; position: absolute; width: 330px; height: 330px; border: 1px solid rgba(183,209,255,.24); border-radius: 50%; }
+.hero-art::before { transform: rotateX(68deg) rotateZ(-22deg) scaleY(.68); box-shadow: 0 0 0 32px rgba(130,151,255,.025), 0 0 0 66px rgba(130,151,255,.025); }
+.hero-art::after { width: 260px; height: 260px; border-color: rgba(66,224,192,.28); transform: rotateX(68deg) rotateZ(28deg) scaleY(.68); }
+.art-card {
+  position: relative; z-index: 1; width: min(100%, 355px); min-height: 302px; padding: 1.35rem;
+  border: 1px solid rgba(255,255,255,.26); border-radius: 26px 26px 26px 7px;
+  background: linear-gradient(145deg, rgba(255,255,255,.16), rgba(255,255,255,.055));
+  box-shadow: 0 28px 90px rgba(3,8,28,.44), inset 0 1px rgba(255,255,255,.26);
+  backdrop-filter: blur(20px); transform: rotateY(-8deg) rotateX(4deg); transition: transform .45s cubic-bezier(.2,.8,.2,1);
+}
+.hero-art:hover .art-card { transform: rotateY(0) rotateX(0) translateY(-4px); }
+.art-label { display: flex; align-items: center; justify-content: space-between; gap: .8rem; color: #d6e5f6; font-size: .65rem; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+.art-dots { display: flex; gap: 4px; }
+.art-dots i { display: block; width: 6px; height: 6px; border-radius: 50%; background: var(--coral); }
+.network { position: relative; height: 184px; margin: 1.2rem 0 .5rem; }
+.network svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.network line { stroke: rgba(151,226,221,.65); stroke-width: 2; stroke-dasharray: 4 5; }
+.node { position: absolute; display: grid; place-items: center; width: 52px; height: 52px; border: 1px solid rgba(255,255,255,.22); border-radius: 50%; color: #edf3ff; background: rgba(101,88,239,.7); font: 750 .67rem var(--sans); box-shadow: 0 0 24px rgba(101,88,239,.22); }
+.node-a { left: 14px; top: 17px; }
+.node-b { right: 12px; top: 23px; color: var(--night); background: var(--lime); }
+.node-main { left: calc(50% - 36px); top: 59px; width: 72px; height: 72px; border-radius: 22px 50% 50%; color: var(--night); background: linear-gradient(145deg, var(--aqua), #9af0db); font-size: 1rem; box-shadow: 0 0 36px rgba(66,224,192,.3); }
+.node-c { left: 28px; bottom: 0; color: var(--night); background: var(--coral); }
+.node-d { right: 8px; bottom: 4px; }
+.art-caption { margin: 0; color: #dbe6fa; text-align: center; font-size: .88rem; }
+.hero-foot { display: flex; flex-wrap: wrap; gap: .8rem 2.4rem; margin-top: 3.4rem; padding-top: 1.1rem; border-top: 1px solid rgba(214,229,255,.18); color: #c6d2ec; font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.hero-foot span { display: flex; gap: .45rem; align-items: center; }
+.hero-foot strong { color: var(--aqua); font-size: 1.05rem; }
+
+.intro { padding: 5rem 0 1.8rem; }
+.section-kicker { margin: 0 0 .7rem; color: var(--violet-deep); font-size: .69rem; font-weight: 850; letter-spacing: .16em; text-transform: uppercase; }
+.section-heading { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(260px, .85fr); align-items: end; gap: 3rem; }
+.section-heading h2 { max-width: 740px; margin: 0; color: var(--ink); font: 780 clamp(2.45rem, 5.2vw, 4.5rem)/.99 var(--display); letter-spacing: -.07em; }
+.section-heading p { position: relative; margin: 0 0 .15rem; padding: 1rem 0 1rem 1.2rem; border-left: 3px solid var(--aqua); color: var(--ink-soft); font-size: .94rem; }
+.toolbox { padding: 1rem 0 6rem; }
+.tool-controls { display: grid; grid-template-columns: 1fr minmax(230px, 330px); align-items: center; gap: .8rem 1.2rem; margin-bottom: 1.2rem; }
+.filter-bar { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; }
+.filter-label { margin-right: .2rem; color: #66738c; font-size: .73rem; font-weight: 800; }
+.filter { border: 1px solid var(--line); border-radius: 999px; padding: .56rem .86rem; color: var(--ink-soft); background: rgba(255,255,255,.72); font: 750 .75rem var(--sans); cursor: pointer; transition: transform .18s ease, color .18s ease, border-color .18s ease, background .18s ease; }
+.filter:hover { transform: translateY(-1px); border-color: #aaa2fa; }
+.filter[aria-pressed="true"] { border-color: var(--night); color: #fff; background: var(--night); box-shadow: 0 5px 14px rgba(11,20,48,.15); }
+.search-box { display: grid; gap: .3rem; color: #66738c; font-size: .7rem; font-weight: 750; }
+.search-box input { width: 100%; min-height: 42px; border: 1px solid var(--line); border-radius: 12px; padding: .58rem .8rem; color: var(--ink); background: #fff; box-shadow: 0 4px 15px rgba(17,30,68,.035); }
+.search-box input::placeholder { color: #8994a9; }
+.filter-status { grid-column: 1 / -1; margin: -.15rem 0 0; color: #77839a; font-size: .72rem; }
+.cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; align-items: stretch; }
+.tool-card {
+  --card-accent: var(--violet);
+  position: relative; display: flex; flex-direction: column; min-width: 0; min-height: 450px; overflow: hidden;
+  padding: 1.35rem; border: 1px solid rgba(190,202,224,.75); border-top: 3px solid var(--card-accent); border-radius: 22px 22px 22px 7px;
+  background: rgba(255,255,255,.92); box-shadow: 0 9px 28px rgba(24,39,78,.055);
+  transform-style: preserve-3d; transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+.tool-card.communication { --card-accent: var(--violet); }
+.tool-card.social { --card-accent: #159f94; border-radius: 7px 22px 7px 22px; background: linear-gradient(150deg, #fff 50%, #f2f2ff); }
+.tool-card::before { content: ""; position: absolute; z-index: 0; inset: 0; border-radius: inherit; opacity: 0; pointer-events: none; background: radial-gradient(245px circle at var(--pointer-x, 50%) var(--pointer-y, 50%), rgba(101,88,239,.09), transparent 72%); transition: opacity .2s ease; }
+.tool-card.social::before { background: radial-gradient(245px circle at var(--pointer-x, 50%) var(--pointer-y, 50%), rgba(21,159,148,.09), transparent 72%); }
+.tool-card:hover::before { opacity: 1; }
+.tool-card::after { content: ""; position: absolute; z-index: 0; right: -64px; top: -78px; width: 155px; height: 155px; border: 1px solid rgba(101,88,239,.11); border-radius: 50%; box-shadow: 0 0 0 18px rgba(101,88,239,.025), 0 0 0 36px rgba(101,88,239,.018); pointer-events: none; }
+.tool-card.social::after { border-color: rgba(21,159,148,.15); box-shadow: 0 0 0 18px rgba(21,159,148,.025), 0 0 0 36px rgba(21,159,148,.018); }
+.tool-card:hover { z-index: 2; transform: translateY(-5px); border-color: rgba(101,88,239,.35); box-shadow: var(--shadow); }
+.tool-card[hidden] { display: none; }
+.card-top { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: .7rem; margin-bottom: .85rem; }
+.card-number { color: #8390a8; font: 800 .72rem var(--sans); letter-spacing: .08em; }
+.card-tag { display: inline-flex; align-items: center; gap: .4rem; padding: .34rem .58rem; border-radius: 999px; color: #4a40b3; background: #efedff; font-size: .61rem; font-weight: 850; letter-spacing: .06em; text-transform: uppercase; }
+.social .card-tag { color: #087c75; background: #e0f6f1; }
+.card-tag::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.card-icon { position: relative; z-index: 1; display: grid; place-items: center; width: 48px; height: 48px; margin: .1rem 0 .85rem; border: 1px solid rgba(101,88,239,.15); border-radius: 15px; color: var(--violet); background: #f1f0ff; }
+.social .card-icon { border-color: rgba(21,159,148,.16); color: #0b8f85; background: #e8f8f4; }
+.card-icon svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.tool-card h3 { position: relative; z-index: 1; margin-bottom: .55rem; color: var(--ink); font: 780 1.48rem/1.12 var(--display); letter-spacing: -.04em; }
+.tool-card .definition { position: relative; z-index: 1; margin-bottom: 1rem; color: var(--ink-soft); font-size: .83rem; line-height: 1.58; }
+.example { position: relative; z-index: 1; margin-top: auto; padding: .9rem .95rem; border: 1px solid #e7e9fb; border-radius: 14px; background: linear-gradient(120deg, #f5f5ff, #f8fbff); }
+.social .example { border-color: #ddf1ec; background: linear-gradient(120deg, #effaf7, #f8fbff); }
+.example-label { margin: 0 0 .3rem; color: var(--violet-deep); font-size: .62rem; font-weight: 850; letter-spacing: .11em; text-transform: uppercase; }
+.social .example-label { color: #087c75; }
+.example p { margin: 0; color: #3f4c67; font-size: .78rem; line-height: 1.55; }
+.good-practice { position: relative; z-index: 1; display: flex; align-items: flex-start; gap: .5rem; margin: .85rem 0 0; color: #586880; font-size: .72rem; }
+.good-practice > span:first-child { display: grid; place-items: center; flex: 0 0 21px; height: 21px; border-radius: 50%; color: #0a675e; background: #dff7f0; font-weight: 900; }
+.good-practice b { color: #237e6b; font-size: .67rem; text-transform: uppercase; letter-spacing: .04em; }
+.card-cite { position: relative; z-index: 1; margin: .7rem 0 0; color: #7b879d; font-size: .63rem; line-height: 1.48; }
+.detail-button { display: inline-flex; align-items: center; gap: .45rem; align-self: flex-start; margin-top: .75rem; padding: .45rem .7rem; border: 0; border-radius: 9px; color: var(--violet-deep); background: #f0efff; font-size: .72rem; font-weight: 850; cursor: pointer; transition: color .18s ease, background .18s ease, transform .18s ease; }
+.social .detail-button { color: #087c75; background: #e5f7f2; }
+.detail-button:hover { transform: translateX(3px); color: #fff; background: var(--violet-deep); }
+.social .detail-button:hover { background: #087c75; }
+.empty-state { grid-column: 1 / -1; margin: 0; padding: 2.5rem 1rem; border: 1px dashed #b9c4da; border-radius: 18px; color: var(--ink-soft); text-align: center; background: rgba(255,255,255,.6); }
+
+.reflection { position: relative; isolation: isolate; overflow: hidden; padding: 5.3rem 0; color: #f8f9ff; background: linear-gradient(120deg, #0b1430, #172652 62%, #29346e); }
+.reflection::before, .reflection::after { content: ""; position: absolute; z-index: -1; border: 1px solid rgba(66,224,192,.22); border-radius: 50%; }
+.reflection::before { width: 490px; height: 490px; right: -165px; bottom: -330px; box-shadow: 0 0 0 38px rgba(66,224,192,.025), 0 0 0 78px rgba(66,224,192,.018); }
+.reflection::after { width: 250px; height: 250px; left: -155px; top: -190px; border-color: rgba(255,148,125,.2); }
+.reflection-grid { display: grid; grid-template-columns: minmax(0, .78fr) minmax(0, 1.22fr); gap: 4rem; align-items: start; }
+.reflection .section-kicker { color: var(--aqua); }
+.reflection h2 { margin: 0; color: #fff; font: 780 clamp(2.4rem, 5vw, 4.3rem)/.98 var(--display); letter-spacing: -.07em; }
+.reflection-copy { color: #d6e0f6; font-size: .96rem; }
+.reflection-copy p:last-of-type { margin-bottom: 0; }
+.pullquote { margin: 1.6rem 0 0; padding: 1rem 0 1rem 1.2rem; border-left: 3px solid var(--coral); color: var(--lime); font: 650 1.2rem/1.45 var(--display); }
+.references { padding: 5.4rem 0 4.4rem; }
+.references-head { display: grid; grid-template-columns: 1fr minmax(240px, 340px); align-items: end; gap: 2rem; margin-bottom: 1.3rem; }
+.references-head h2 { margin: 0; color: var(--ink); font: 780 clamp(2.45rem, 5vw, 4.1rem)/.96 var(--display); letter-spacing: -.07em; }
+.references-head p { margin: 0 0 .1rem; color: var(--ink-soft); font-size: .84rem; }
+.reference-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 2.5rem; padding: 0; list-style: none; }
+.reference-list li { min-width: 0; padding: 1rem 0; border-top: 1px solid var(--line); color: #596780; font-size: .74rem; overflow-wrap: anywhere; }
+.reference-list a { color: #4c40bf; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.reference-list a:hover { color: #087c75; }
+.reference-list .reference-author { color: var(--ink); font-weight: 800; }
+.author-strip { padding: 1.25rem 0; border-block: 1px solid #dae4f3; background: linear-gradient(90deg, #e9effc, #e5f7f3); }
+.author-inner { display: flex; justify-content: space-between; gap: 1rem; align-items: center; color: #586780; font-size: .72rem; }
+.author-name { color: var(--ink); font-weight: 850; }
+.site-footer { padding: 1.35rem 0 1.8rem; color: #cad5ed; background: var(--night); font-size: .7rem; }
+.footer-inner { display: flex; justify-content: space-between; gap: 1.5rem; }
+.footer-inner p { margin: 0; }
+.back-top { color: var(--aqua); text-decoration: none; font-weight: 800; }
+.back-top:hover { color: var(--lime); }
+
+.detail-dialog { width: min(92vw, 650px); max-width: 650px; max-height: min(85vh, 780px); padding: 0; border: 1px solid rgba(215,225,245,.25); border-radius: 24px; color: var(--ink); background: transparent; box-shadow: 0 30px 100px rgba(4,10,34,.38); }
+.detail-dialog::backdrop { background: rgba(7,13,34,.68); backdrop-filter: blur(8px); }
+.dialog-card { position: relative; padding: clamp(1.3rem, 4vw, 2.3rem); border-radius: inherit; background: linear-gradient(145deg, #fff, #f1f6ff); }
+.dialog-close { position: absolute; top: 1rem; right: 1rem; display: grid; place-items: center; width: 38px; height: 38px; border: 1px solid var(--line); border-radius: 50%; color: var(--ink); background: #fff; font-size: 1.1rem; cursor: pointer; }
+.dialog-category { margin: 0 3rem .45rem 0; color: var(--violet-deep); font-size: .68rem; font-weight: 850; letter-spacing: .11em; text-transform: uppercase; }
+.dialog-card h2 { margin: 0 2rem 1rem 0; color: var(--ink); font: 800 clamp(1.8rem, 4vw, 2.6rem)/1 var(--display); letter-spacing: -.05em; }
+.dialog-definition { color: var(--ink-soft); }
+.dialog-example { margin: 1.2rem 0; padding: 1rem; border-radius: 14px; background: #eef1ff; }
+.dialog-example h3 { margin: 0 0 .4rem; color: var(--violet-deep); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }
+.dialog-example p, .dialog-practice { margin: 0; color: #3f4c67; font-size: .9rem; }
+.dialog-practice { padding-top: .9rem; border-top: 1px solid var(--line); }
+.dialog-cite { margin: .8rem 0 0; color: #7b879d; font-size: .74rem; }
+
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity .55s ease, transform .55s cubic-bezier(.2,.8,.2,1); }
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+.tool-card.reveal:nth-child(3n + 2) { transition-delay: .07s; }
+.tool-card.reveal:nth-child(3n) { transition-delay: .13s; }
+
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: minmax(0, 1fr) minmax(260px, .8fr); gap: 1.3rem; }
+  .hero-art { min-height: 335px; }
+  .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .tool-card { min-height: 420px; }
+  .reflection-grid { gap: 2.4rem; }
+}
+@media (max-width: 700px) {
+  html { scroll-padding-top: 74px; }
+  .shell { width: min(calc(100% - 32px), var(--max)); }
+  .topbar-inner { min-height: 66px; gap: .75rem; }
+  .brand { font-size: .72rem; letter-spacing: .1em; }
+  .brand-mark { width: 36px; height: 36px; }
+  .menu-toggle { display: inline-flex; }
+  .js-enabled .nav { display: none; position: absolute; inset: 66px 0 auto; padding: .65rem 1rem 1rem; border-bottom: 1px solid rgba(226,236,255,.13); background: rgba(11,20,48,.98); box-shadow: 0 18px 26px rgba(3,8,28,.22); }
+  .js-enabled .nav.is-open { display: grid; gap: .2rem; }
+  .nav a { padding: .75rem .85rem; }
+  .nav a:not(.nav-pill)::after { display: none; }
+  .nav .nav-pill { margin: .3rem 0 0; justify-self: start; }
+  .hero { padding: 4.1rem 0 1.7rem; }
+  .hero-grid { grid-template-columns: 1fr; gap: .6rem; }
+  h1 { font-size: clamp(3.55rem, 16vw, 5.6rem); }
+  .hero-copy { max-width: 560px; font-size: 1rem; }
+  .hero-art { min-height: 310px; }
+  .art-card { width: min(100%, 340px); transform: none; }
+  .hero-art:hover .art-card { transform: translateY(-2px); }
+  .hero-foot { gap: .7rem 1.25rem; margin-top: 1.7rem; font-size: .62rem; }
+  .intro { padding-top: 3.7rem; }
+  .section-heading, .references-head { grid-template-columns: 1fr; gap: 1rem; }
+  .section-heading h2 { font-size: clamp(2.4rem, 11vw, 3.5rem); }
+  .tool-controls { grid-template-columns: 1fr; gap: .75rem; }
+  .filter-bar { gap: .35rem; }
+  .filter-label { width: 100%; }
+  .filter { padding: .5rem .72rem; }
+  .filter-status { grid-column: auto; }
+  .cards { grid-template-columns: 1fr; }
+  .tool-card { min-height: 0; padding: 1.15rem; }
+  .tool-card .definition { font-size: .86rem; }
+  .reflection { padding: 3.8rem 0; }
+  .reflection-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+  .reflection h2 { font-size: clamp(2.5rem, 10vw, 3.5rem); }
+  .references { padding: 3.8rem 0 3rem; }
+  .reference-list { grid-template-columns: 1fr; }
+  .author-inner, .footer-inner { align-items: flex-start; flex-direction: column; gap: .4rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+  .reveal { opacity: 1 !important; transform: none !important; }
+  .hero-art:hover .art-card, .tool-card:hover, .button:hover { transform: none; }
+}
+@media print {
+  .topbar, .hero-actions, .tool-controls, .detail-button, .site-footer { display: none !important; }
+  body { background: #fff; }
+  .hero, .reflection { color: #111; background: #fff; }
+  .hero-copy, .reflection-copy { color: #333; }
+  .hero-art { min-height: 0; }
+  .tool-card { break-inside: avoid; box-shadow: none; }
+  .reveal { opacity: 1; transform: none; }
+}
+
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <header id="inicio" class="topbar">
+    <div class="shell topbar-inner">
+      <a class="brand" href="#inicio" aria-label="Aula en Red, inicio"><span class="brand-mark" aria-hidden="true">A</span><span>AULA EN RED</span></a>
+      <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span class="menu-icon" aria-hidden="true"></span><span>Menú</span>
+      </button>
+      <nav class="nav" id="site-nav" aria-label="Navegación principal">
+        <a href="#herramientas">Herramientas</a>
+        <a href="#reflexion">Reflexión</a>
+        <a href="#referencias">Fuentes</a>
+        <a class="nav-pill" href="#autor">Sobre el autor</a>
+      </nav>
+    </div>
+    <div class="reading-progress" aria-hidden="true"><span id="reading-progress"></span></div>
+  </header>
+
+  <main id="contenido">
+    <section class="hero" aria-labelledby="titulo-principal">
+      <div class="shell">
+        <div class="hero-grid">
+          <div>
+            <p class="eyebrow">Bitácora de aprendizaje · ICC</p>
+            <h1 id="titulo-principal">Aula <em>en red.</em></h1>
+            <p class="hero-copy">Herramientas digitales para comunicar con claridad, aprender en comunidad y construir una trayectoria académica que siga creciendo.</p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#herramientas">Explorar las herramientas <span aria-hidden="true">↘</span></a>
+              <a class="button button-link" href="#reflexion">Leer la reflexión <span aria-hidden="true">→</span></a>
+            </div>
+          </div>
+          <div class="hero-art" aria-label="Ilustración abstracta de personas conectadas alrededor del aprendizaje">
+            <div class="art-card">
+              <div class="art-label"><span>Ideas que conectan</span><span class="art-dots" aria-hidden="true"><i></i><i></i><i></i></span></div>
+              <div class="network" aria-hidden="true">
+                <svg viewBox="0 0 300 174" preserveAspectRatio="none"><line x1="150" y1="87" x2="42" y2="39"/><line x1="150" y1="87" x2="254" y2="43"/><line x1="150" y1="87" x2="55" y2="150"/><line x1="150" y1="87" x2="264" y2="147"/></svg>
+                <span class="node node-a">lee</span><span class="node node-b">comparte</span><span class="node node-main">ICC</span><span class="node node-c">crea</span><span class="node node-d">dialoga</span>
+              </div>
+              <p class="art-caption">Cada herramienta abre una puerta.</p>
+            </div>
+          </div>
+        </div>
+        <div class="hero-foot" aria-label="Contenido de esta bitácora">
+          <span><strong>06</strong> herramientas</span><span><strong>03</strong> para comunicar</span><span><strong>03</strong> para socializar</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="intro shell" aria-labelledby="herramientas">
+      <p class="section-kicker">Comunicar · compartir · aprender</p>
+      <div class="section-heading">
+        <h2 id="herramientas">Un espacio digital, muchas formas de aprender.</h2>
+        <p>En el Instituto Consorcio Clavijero, elegir bien el canal ayuda a organizar el estudio, colaborar con respeto y mantener una presencia académica responsable.</p>
+      </div>
+    </section>
+
+    <section class="toolbox shell" aria-label="Definiciones y ejemplos de herramientas digitales">
+      <div class="tool-controls">
+        <div class="filter-bar" role="group" aria-label="Filtrar herramientas por tipo">
+          <span class="filter-label">Ver:</span>
+          <button class="filter" type="button" data-filter="all" aria-pressed="true">Todas</button>
+          <button class="filter" type="button" data-filter="comunicacion" aria-pressed="false">Comunicación</button>
+          <button class="filter" type="button" data-filter="socializacion" aria-pressed="false">Socialización</button>
+        </div>
+        <label class="search-box" for="tool-search">
+          <span>Buscar una herramienta</span>
+          <input id="tool-search" type="search" autocomplete="off" placeholder="Ej. correo o videollamada">
+        </label>
+        <p class="filter-status" id="filter-status" aria-live="polite">Mostrando 6 herramientas.</p>
+      </div>
+      <div class="cards" id="tarjetas">
+        <article class="tool-card communication" data-category="comunicacion">
+          <div class="card-top"><span class="card-number">01 / 06</span><span class="card-tag">Comunicación</span></div>
+          <h3>Correo electrónico</h3>
+          <p class="definition">Servicio para redactar, enviar y recibir mensajes entre direcciones electrónicas. Permite organizar conversaciones y adjuntar documentos o enlaces; es útil cuando la respuesta no necesita ser inmediata.</p>
+          <div class="example"><p class="example-label">Un día en el ICC</p><p>Escribiría desde mi cuenta institucional al docente con el asunto “Duda sobre la Actividad 4”, explicaría una pregunta concreta y adjuntaría el avance del trabajo si fuera necesario.</p></div>
+          <p class="good-practice"><span aria-hidden="true">↗</span><span><b>Buena práctica:</b> asunto claro, saludo, petición específica y firma con nombre y grupo.</span></p>
+          <p class="card-cite">El flujo de Gmail contempla destinatarios, asunto, redacción y envío (Google, s. f.-c).</p>
+        </article>
+
+        <article class="tool-card communication" data-category="comunicacion">
+          <div class="card-top"><span class="card-number">02 / 06</span><span class="card-tag">Comunicación</span></div>
+          <h3>Mensajería instantánea</h3>
+          <p class="definition">Intercambio de mensajes breves en una aplicación conectada a internet. Puede ser individual o grupal y facilita coordinarse en el momento; algunas plataformas también permiten compartir archivos o iniciar llamadas.</p>
+          <div class="example"><p class="example-label">Un día en el ICC</p><p>En un chat de equipo acordaría la hora de una reunión, repartiría las partes de una exposición y compartiría el enlace a un documento de trabajo colaborativo.</p></div>
+          <p class="good-practice"><span aria-hidden="true">↗</span><span><b>Buena práctica:</b> mantener el chat en el tema del curso y no asumir que todos responden al instante.</span></p>
+          <p class="card-cite">Teams permite conversaciones individuales y grupales, además de llamadas desde el chat (Microsoft, s. f.-a).</p>
+        </article>
+
+        <article class="tool-card communication" data-category="comunicacion">
+          <div class="card-top"><span class="card-number">03 / 06</span><span class="card-tag">Comunicación</span></div>
+          <h3>Videollamadas</h3>
+          <p class="definition">Conversaciones en tiempo real que transmiten voz y video por internet. Hacen posible reunirse a distancia, conversar cara a cara y, en muchas plataformas, mostrar la pantalla o revisar materiales en conjunto.</p>
+          <div class="example"><p class="example-label">Un día en el ICC</p><p>Con mi equipo realizaría una sesión breve para explicar un tema difícil, compartir una diapositiva y resolver dudas antes de entregar una actividad.</p></div>
+          <p class="good-practice"><span aria-hidden="true">↗</span><span><b>Buena práctica:</b> probar audio y conexión, entrar a tiempo y pedir la palabra con cortesía.</span></p>
+          <p class="card-cite">Microsoft Teams ofrece llamadas de audio y video individuales o grupales desde un chat (Microsoft, s. f.-b).</p>
+        </article>
+
+        <article class="tool-card social" data-category="socializacion">
+          <div class="card-top"><span class="card-number">04 / 06</span><span class="card-tag">Socialización</span></div>
+          <h3>Redes sociales</h3>
+          <p class="definition">Plataformas donde las personas crean perfiles o comunidades para compartir información, ideas y contenidos, además de interactuar con otras personas mediante publicaciones, comentarios o grupos.</p>
+          <div class="example"><p class="example-label">Un día en el ICC</p><p>Participaría en un grupo académico para intercambiar recursos confiables, comentar estrategias de estudio y compartir avisos del curso, respetando las reglas del espacio.</p></div>
+          <p class="good-practice"><span aria-hidden="true">↗</span><span><b>Buena práctica:</b> comprobar la fuente antes de compartir y cuidar la privacidad de compañeros.</span></p>
+          <p class="card-cite">Las redes sociales facilitan crear comunidades y compartir información e ideas (University Marketing and Communications, s. f.).</p>
+        </article>
+
+        <article class="tool-card social" data-category="socializacion">
+          <div class="card-top"><span class="card-number">05 / 06</span><span class="card-tag">Socialización</span></div>
+          <h3>Blogs</h3>
+          <p class="definition">Sitios que reúnen publicaciones o entradas de una persona o equipo. Sus temas pueden organizarse con títulos, fechas y etiquetas; una bitácora bien estructurada permite volver a las ideas y recursos con facilidad.</p>
+          <div class="example"><p class="example-label">Un día en el ICC</p><p>Mantendría esta bitácora como cuaderno digital: publicaría síntesis de cada módulo, ejemplos de herramientas, reflexiones breves y referencias que pueda consultar más adelante.</p></div>
+          <p class="good-practice"><span aria-hidden="true">↗</span><span><b>Buena práctica:</b> actualizar el contenido, organizarlo por temas y dar crédito a las fuentes.</span></p>
+          <p class="card-cite">Blogger permite crear y gestionar un blog; las etiquetas ayudan a organizar y filtrar publicaciones (Google, s. f.-a; Nieves, 2025).</p>
+        </article>
+
+        <article class="tool-card social" data-category="socializacion">
+          <div class="card-top"><span class="card-number">06 / 06</span><span class="card-tag">Socialización</span></div>
+          <h3>Páginas personales</h3>
+          <p class="definition">Sitios web individuales para presentar información, proyectos, intereses o una trayectoria. A diferencia de un blog —centrado en nuevas entradas—, una página personal suele organizarse en secciones estables y puede funcionar como portafolio.</p>
+          <div class="example"><p class="example-label">Un día en el ICC</p><p>Diseñaría una página-portafolio con una presentación, trabajos seleccionados, habilidades digitales y una sección de aprendizajes que pueda ampliar durante mis estudios.</p></div>
+          <p class="good-practice"><span aria-hidden="true">↗</span><span><b>Buena práctica:</b> compartir solo datos que deseo hacer públicos y revisar los permisos antes de difundir el enlace.</span></p>
+          <p class="card-cite">Google Sites permite organizar páginas y compartir un sitio con otras personas (Google, s. f.-b).</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="reflexion" class="reflection" aria-labelledby="titulo-reflexion">
+      <div class="shell reflection-grid">
+        <div><p class="section-kicker">Cierre · mi proceso formativo</p><h2 id="titulo-reflexion">La herramienta adecuada depende del propósito.</h2></div>
+        <div class="reflection-copy">
+          <p>Durante mis estudios en el ICC puedo combinar estas herramientas: el correo para comunicarme formalmente con mis docentes; la mensajería para coordinar tareas; las videollamadas para conversar y explicar; y los espacios sociales para compartir recursos, documentar aprendizajes y mostrar proyectos.</p>
+          <p>Usarlas con intención también implica escribir con claridad, verificar la información, cuidar la privacidad y reconocer el trabajo de otras personas. Incorporar citas en el texto y una lista de referencias en estilo APA ayuda a que mis publicaciones sean más transparentes y académicas (American Psychological Association, 2024).</p>
+          <blockquote class="pullquote">“Conectar no es solo estar en línea: es aportar algo útil a la comunidad que aprende.”</blockquote>
+        </div>
+      </div>
+    </section>
+
+    <section id="referencias" class="references shell" aria-labelledby="titulo-referencias">
+      <div class="references-head">
+        <div><p class="section-kicker">Lecturas consultadas</p><h2 id="titulo-referencias">Referencias</h2></div>
+        <p>Fuentes institucionales y materiales de apoyo. Formato de referencias basado en la séptima edición de APA.</p>
+      </div>
+      <ul class="reference-list">
+        <li id="ref-apa"><span class="reference-author">American Psychological Association.</span> (2024, February). <i>Style and grammar guidelines.</i> APA Style. <a href="https://apastyle.apa.org/style-grammar-guidelines" target="_blank" rel="noopener noreferrer">https://apastyle.apa.org/style-grammar-guidelines</a></li>
+        <li id="ref-google-blog"><span class="reference-author">Google.</span> (s. f.-a). <i>Crear un blog.</i> Ayuda de Blogger. <a href="https://support.google.com/blogger/answer/1623800?hl=es" target="_blank" rel="noopener noreferrer">https://support.google.com/blogger/answer/1623800?hl=es</a></li>
+        <li id="ref-google-sites"><span class="reference-author">Google.</span> (s. f.-b). <i>How to use Google Sites.</i> Google Sites Help. <a href="https://support.google.com/sites/answer/6372878?hl=en-GB" target="_blank" rel="noopener noreferrer">https://support.google.com/sites/answer/6372878?hl=en-GB</a></li>
+        <li id="ref-gmail"><span class="reference-author">Google.</span> (s. f.-c). <i>Send or unsend Gmail messages.</i> Gmail Help. <a href="https://support.google.com/mail/answer/2819488?hl=en" target="_blank" rel="noopener noreferrer">https://support.google.com/mail/answer/2819488?hl=en</a></li>
+        <li id="ref-social"><span class="reference-author">University Marketing and Communications.</span> (s. f.). <i>Social media glossary.</i> Illinois State University. <a href="https://universitymarketing.illinoisstate.edu/identity/socialmedia/glossary/" target="_blank" rel="noopener noreferrer">https://universitymarketing.illinoisstate.edu/identity/socialmedia/glossary/</a></li>
+        <li id="ref-microsoft-chat"><span class="reference-author">Microsoft.</span> (s. f.-a). <i>Chat with employees and customers.</i> Microsoft Support. <a href="https://support.microsoft.com/en-us/teams/shifts/chat-with-employees-and-customers" target="_blank" rel="noopener noreferrer">https://support.microsoft.com/en-us/teams/shifts/chat-with-employees-and-customers</a></li>
+        <li id="ref-microsoft-call"><span class="reference-author">Microsoft.</span> (s. f.-b). <i>Start a call from a chat in Microsoft Teams.</i> Microsoft Support. <a href="https://support.microsoft.com/en-gb/teams/calls-devices/start-a-call-from-a-chat-in-microsoft-teams" target="_blank" rel="noopener noreferrer">https://support.microsoft.com/en-gb/teams/calls-devices/start-a-call-from-a-chat-in-microsoft-teams</a></li>
+        <li id="ref-nieves"><span class="reference-author">Nieves, G. D.</span> (2025, 26 de junio). <i>Características de un blog: los componentes esenciales.</i> Postedin. <a href="https://www.postedin.com/blog/caracteristicas-blog-componentes-esenciales/" target="_blank" rel="noopener noreferrer">https://www.postedin.com/blog/caracteristicas-blog-componentes-esenciales/</a></li>
+        <li id="ref-programate"><span class="reference-author">PrograMate.</span> (2022, 3 de enero). <i>Cómo crear un blog en Blogger paso a paso [2026]</i> [Video]. YouTube. <a href="https://www.youtube.com/watch?v=39FD-FO9L5E" target="_blank" rel="noopener noreferrer">https://www.youtube.com/watch?v=39FD-FO9L5E</a></li>
+      </ul>
+    </section>
+
+    <section id="autor" class="author-strip">
+      <div class="shell author-inner"><span>Escrito por <span class="author-name">Alan Ballesteros</span></span><span>Computación Básica · Actividad 4</span><span>Instituto Consorcio Clavijero · 12 de noviembre de 2026</span></div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="shell footer-inner"><p>Bitácora educativa para aprender, compartir y seguir creciendo.</p><a class="back-top" href="#inicio">Volver arriba ↑</a></div></footer>
+  <dialog class="detail-dialog" id="tool-dialog" aria-labelledby="dialog-title">
+    <div class="dialog-card">
+      <button class="dialog-close" type="button" aria-label="Cerrar detalle">×</button>
+      <p class="dialog-category" id="dialog-category"></p>
+      <h2 id="dialog-title"></h2>
+      <p class="dialog-definition" id="dialog-definition"></p>
+      <div class="dialog-example"><h3 id="dialog-example-label"></h3><p id="dialog-example"></p></div>
+      <p class="dialog-practice" id="dialog-practice"></p>
+      <p class="dialog-cite" id="dialog-cite"></p>
+    </div>
+  </dialog>
+  <script>
+(() => {
+  const root = document.documentElement;
+  const cards = [...document.querySelectorAll(".tool-card")];
+  const filters = [...document.querySelectorAll(".filter")];
+  const search = document.querySelector("#tool-search");
+  const status = document.querySelector("#filter-status");
+  const dialog = document.querySelector("#tool-dialog");
+  const menuToggle = document.querySelector("#menu-toggle");
+  const nav = document.querySelector("#site-nav");
+  const progress = document.querySelector("#reading-progress");
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let currentFilter = "all";
+
+  root.classList.add("js-enabled");
+
+  const icons = {
+    "Correo electrónico": '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="14" rx="2"/><path d="m4.5 7 7.5 5.8L19.5 7"/></svg>',
+    "Mensajería instantánea": '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5.5h10.5a3 3 0 0 1 3 3v5a3 3 0 0 1-3 3H9l-4 3v-3.6a3 3 0 0 1-2-2.8v-4.6a3 3 0 0 1 2-3Z"/><path d="M8 10h7M8 13h4"/></svg>',
+    Videollamadas: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5.5" width="13" height="13" rx="2"/><path d="m16 10 5-3v10l-5-3z"/><path d="M7 9h5"/></svg>',
+    "Redes sociales": '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7" cy="7" r="2.5"/><circle cx="17" cy="7" r="2.5"/><circle cx="12" cy="17" r="2.5"/><path d="m9 8.5 2 5.8M15 8.5l-2 5.8M9.5 7h5"/></svg>',
+    Blogs: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h9l4 4V20a1 1 0 0 1-1 1H6a2 2 0 0 1-2-2V5.5a2 2 0 0 1 2-2Z"/><path d="M14.5 3.8V8h4M8 12h8M8 15.5h8M8 8.8h2"/></svg>',
+    "Páginas personales": '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3"/><path d="M5 20a7 7 0 0 1 14 0M4 4v4M2 6h4M18 4v4M16 6h4"/></svg>'
+  };
+
+  cards.forEach((card) => {
+    const title = card.querySelector("h3")?.textContent.trim() ?? "Herramienta";
+    const icon = document.createElement("span");
+    icon.className = "card-icon";
+    icon.setAttribute("aria-hidden", "true");
+    icon.innerHTML = icons[title] ?? "";
+    card.insertBefore(icon, card.querySelector("h3"));
+
+    const detailButton = document.createElement("button");
+    detailButton.className = "detail-button";
+    detailButton.type = "button";
+    detailButton.setAttribute("aria-label", `Ver detalle de ${title}`);
+    detailButton.append(document.createTextNode("Ver detalle "));
+    const arrow = document.createElement("span");
+    arrow.setAttribute("aria-hidden", "true");
+    arrow.textContent = "↗";
+    detailButton.append(arrow);
+    detailButton.addEventListener("click", () => openDetails(card));
+    card.insertBefore(detailButton, card.querySelector(".card-cite"));
+
+    card.addEventListener("pointermove", (event) => {
+      if (event.pointerType !== "mouse" || reducedMotion.matches) return;
+      const bounds = card.getBoundingClientRect();
+      const x = (event.clientX - bounds.left) / bounds.width;
+      const y = (event.clientY - bounds.top) / bounds.height;
+      card.style.setProperty("--pointer-x", `${Math.round(x * 100)}%`);
+      card.style.setProperty("--pointer-y", `${Math.round(y * 100)}%`);
+    });
+    card.addEventListener("pointerleave", () => {
+      card.style.removeProperty("--pointer-x");
+      card.style.removeProperty("--pointer-y");
+    });
+  });
+
+  function openDetails(card) {
+    if (!dialog) return;
+    const title = card.querySelector("h3").textContent.trim();
+    const category = card.querySelector(".card-tag").textContent.trim();
+    const definition = card.querySelector(".definition").textContent.trim();
+    const exampleLabel = card.querySelector(".example-label").textContent.trim();
+    const example = card.querySelector(".example p:last-child").textContent.trim();
+    const practice = card.querySelector(".good-practice").textContent.trim();
+    const cite = card.querySelector(".card-cite").textContent.trim();
+
+    dialog.querySelector("#dialog-category").textContent = category;
+    dialog.querySelector("#dialog-title").textContent = title;
+    dialog.querySelector("#dialog-definition").textContent = definition;
+    dialog.querySelector("#dialog-example-label").textContent = exampleLabel;
+    dialog.querySelector("#dialog-example").textContent = example;
+    dialog.querySelector("#dialog-practice").textContent = practice;
+    dialog.querySelector("#dialog-cite").textContent = cite;
+    dialog.showModal();
+  }
+
+  function updateCards() {
+    const query = search?.value.trim().toLocaleLowerCase("es") ?? "";
+    let visible = 0;
+    cards.forEach((card) => {
+      const categoryMatches = currentFilter === "all" || card.dataset.category === currentFilter;
+      const textMatches = !query || card.textContent.toLocaleLowerCase("es").includes(query);
+      const show = categoryMatches && textMatches;
+      card.hidden = !show;
+      if (show && (currentFilter !== "all" || query)) card.classList.add("is-visible");
+      if (show) visible += 1;
+    });
+    const label = visible === 1 ? "herramienta" : "herramientas";
+    if (status) status.textContent = `Mostrando ${visible} de ${cards.length} ${label}.`;
+    let empty = document.querySelector("#empty-state");
+    if (!empty) {
+      empty = document.createElement("p");
+      empty.id = "empty-state";
+      empty.className = "empty-state";
+      empty.textContent = "No encontré coincidencias. Prueba otra búsqueda o cambia el filtro.";
+      empty.hidden = true;
+      document.querySelector("#tarjetas")?.append(empty);
+    }
+    empty.hidden = visible !== 0;
+  }
+
+  filters.forEach((button) => {
+    button.addEventListener("click", () => {
+      currentFilter = button.dataset.filter ?? "all";
+      filters.forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+      updateCards();
+    });
+  });
+  search?.addEventListener("input", updateCards);
+
+  if (dialog) {
+    dialog.querySelector(".dialog-close")?.addEventListener("click", () => dialog.close());
+    dialog.addEventListener("click", (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+    dialog.addEventListener("close", () => {
+      const title = dialog.querySelector("#dialog-title")?.textContent;
+      const trigger = cards.find((card) => card.querySelector("h3")?.textContent.trim() === title)
+        ?.querySelector(".detail-button");
+      trigger?.focus();
+    });
+  }
+
+  if (menuToggle && nav) {
+    menuToggle.addEventListener("click", () => {
+      const open = menuToggle.getAttribute("aria-expanded") !== "true";
+      menuToggle.setAttribute("aria-expanded", String(open));
+      nav.classList.toggle("is-open", open);
+    });
+    nav.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => {
+      menuToggle.setAttribute("aria-expanded", "false");
+      nav.classList.remove("is-open");
+    }));
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && nav.classList.contains("is-open")) {
+        menuToggle.setAttribute("aria-expanded", "false");
+        nav.classList.remove("is-open");
+        menuToggle.focus();
+      }
+    });
+  }
+
+  const scrollLinks = [...document.querySelectorAll('.nav a[href^="#"]')];
+  const sections = scrollLinks.map((link) => document.querySelector(link.getAttribute("href"))).filter(Boolean);
+  if ("IntersectionObserver" in window) {
+    const navObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        scrollLinks.forEach((link) => {
+          if (link.getAttribute("href") === `#${entry.target.id}`) link.setAttribute("aria-current", "location");
+          else link.removeAttribute("aria-current");
+        });
+      });
+    }, { rootMargin: "-18% 0px -65% 0px", threshold: 0 });
+    sections.forEach((section) => navObserver.observe(section));
+
+    if (!reducedMotion.matches) {
+      root.classList.add("js-motion");
+      const revealTargets = document.querySelectorAll(".intro, .tool-card, .reflection, .references, .author-strip");
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: .12, rootMargin: "0px 0px -3% 0px" });
+      revealTargets.forEach((target) => {
+        target.classList.add("reveal");
+        revealObserver.observe(target);
+      });
+    }
+  }
+
+  let scrollScheduled = false;
+  const updateProgress = () => {
+    if (!progress) return;
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const ratio = maxScroll > 0 ? Math.min(1, Math.max(0, window.scrollY / maxScroll)) : 0;
+    progress.style.transform = `scaleX(${ratio})`;
+    scrollScheduled = false;
+  };
+  window.addEventListener("scroll", () => {
+    if (scrollScheduled) return;
+    scrollScheduled = true;
+    window.requestAnimationFrame(updateProgress);
+  }, { passive: true });
+  window.addEventListener("resize", updateProgress, { passive: true });
+  updateProgress();
+  updateCards();
+})();
+
+  </script>
+</body>
+</html>
