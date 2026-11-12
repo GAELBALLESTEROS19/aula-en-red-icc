@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" fill="none">
+<defs>
+ <linearGradient id="screen" x1="199" y1="105" x2="756" y2="474"><stop stop-color="#fff"/><stop offset="1" stop-color="#e4f3ff"/></linearGradient>
+ <linearGradient id="tile" x1="243" y1="210" x2="540" y2="387"><stop stop-color="#d8f4ff"/><stop offset="1" stop-color="#8bdcff"/></linearGradient>
+ <radialGradient id="person" cx="40%" cy="20%" r="80%"><stop stop-color="#fff"/><stop offset="1" stop-color="#a7e5ff"/></radialGradient>
+ <filter id="s" x="-20%" y="-30%" width="140%" height="180%"><feDropShadow dx="0" dy="22" stdDeviation="24" flood-color="#0b3f82" flood-opacity=".18"/></filter>
+</defs>
+<circle cx="509" cy="301" r="240" fill="#eef8ff"/>
+<g filter="url(#s)"><rect x="160" y="82" width="640" height="436" rx="34" fill="url(#screen)" stroke="#fff" stroke-width="4"/>
+ <rect x="195" y="118" width="570" height="37" rx="13" fill="#fff"/><circle cx="220" cy="136" r="6" fill="#37b9f5"/><circle cx="240" cy="136" r="6" fill="#c6ddf4"/><circle cx="260" cy="136" r="6" fill="#c6ddf4"/><rect x="641" y="128" width="89" height="15" rx="7.5" fill="#dceaff"/>
+ <rect x="194" y="178" width="359" height="240" rx="26" fill="url(#tile)"/>
+ <circle cx="372" cy="264" r="53" fill="url(#person)" stroke="#fff" stroke-width="5"/><circle cx="372" cy="251" r="15" fill="#1264d8"/><path d="M334 309c6-25 20-37 38-37s32 12 38 37" fill="#37b9f5"/>
+ <rect x="573" y="178" width="192" height="112" rx="21" fill="#dcecff"/><circle cx="669" cy="221" r="26" fill="url(#person)"/><circle cx="669" cy="216" r="8" fill="#1264d8"/><path d="M649 241c3-12 10-18 20-18s17 6 20 18" fill="#37b9f5"/>
+ <rect x="573" y="306" width="192" height="112" rx="21" fill="#fff" stroke="#cfe4f8" stroke-width="3"/><rect x="616" y="344" width="108" height="68" rx="10" fill="#1264d8"/><path d="m655 361 31 17-31 17v-34Z" fill="#fff"/>
+ <rect x="194" y="443" width="571" height="42" rx="17" fill="#fff"/><circle cx="420" cy="464" r="9" fill="#37b9f5"/><circle cx="454" cy="464" r="9" fill="#dcebff"/><circle cx="488" cy="464" r="9" fill="#dcebff"/><circle cx="522" cy="464" r="9" fill="#1264d8"/>
+</g>
+<path d="M817 214c28 25 38 58 24 88" stroke="#37b9f5" stroke-width="4" stroke-linecap="round"/><circle cx="843" cy="310" r="9" fill="#1264d8"/>
+</svg>

@@ -13,23 +13,8 @@
 
   root.classList.add("js-enabled");
 
-  const icons = {
-    "Correo electrónico": '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="14" rx="2"/><path d="m4.5 7 7.5 5.8L19.5 7"/></svg>',
-    "Mensajería instantánea": '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5.5h10.5a3 3 0 0 1 3 3v5a3 3 0 0 1-3 3H9l-4 3v-3.6a3 3 0 0 1-2-2.8v-4.6a3 3 0 0 1 2-3Z"/><path d="M8 10h7M8 13h4"/></svg>',
-    Videollamadas: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5.5" width="13" height="13" rx="2"/><path d="m16 10 5-3v10l-5-3z"/><path d="M7 9h5"/></svg>',
-    "Redes sociales": '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7" cy="7" r="2.5"/><circle cx="17" cy="7" r="2.5"/><circle cx="12" cy="17" r="2.5"/><path d="m9 8.5 2 5.8M15 8.5l-2 5.8M9.5 7h5"/></svg>',
-    Blogs: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h9l4 4V20a1 1 0 0 1-1 1H6a2 2 0 0 1-2-2V5.5a2 2 0 0 1 2-2Z"/><path d="M14.5 3.8V8h4M8 12h8M8 15.5h8M8 8.8h2"/></svg>',
-    "Páginas personales": '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3"/><path d="M5 20a7 7 0 0 1 14 0M4 4v4M2 6h4M18 4v4M16 6h4"/></svg>'
-  };
-
   cards.forEach((card) => {
     const title = card.querySelector("h3")?.textContent.trim() ?? "Herramienta";
-    const icon = document.createElement("span");
-    icon.className = "card-icon";
-    icon.setAttribute("aria-hidden", "true");
-    icon.innerHTML = icons[title] ?? "";
-    card.insertBefore(icon, card.querySelector("h3"));
-
     const detailButton = document.createElement("button");
     detailButton.className = "detail-button";
     detailButton.type = "button";
@@ -49,10 +34,14 @@
       const y = (event.clientY - bounds.top) / bounds.height;
       card.style.setProperty("--pointer-x", `${Math.round(x * 100)}%`);
       card.style.setProperty("--pointer-y", `${Math.round(y * 100)}%`);
+      card.style.setProperty("--tilt-y", `${((x - .5) * 4).toFixed(2)}deg`);
+      card.style.setProperty("--tilt-x", `${((.5 - y) * 3).toFixed(2)}deg`);
     });
     card.addEventListener("pointerleave", () => {
       card.style.removeProperty("--pointer-x");
       card.style.removeProperty("--pointer-y");
+      card.style.removeProperty("--tilt-x");
+      card.style.removeProperty("--tilt-y");
     });
   });
 
@@ -65,6 +54,8 @@
     const example = card.querySelector(".example p:last-child").textContent.trim();
     const practice = card.querySelector(".good-practice").textContent.trim();
     const cite = card.querySelector(".card-cite").textContent.trim();
+    const cardImage = card.querySelector(".card-visual img");
+    const dialogImage = dialog.querySelector("#dialog-visual");
 
     dialog.querySelector("#dialog-category").textContent = category;
     dialog.querySelector("#dialog-title").textContent = title;
@@ -73,6 +64,11 @@
     dialog.querySelector("#dialog-example").textContent = example;
     dialog.querySelector("#dialog-practice").textContent = practice;
     dialog.querySelector("#dialog-cite").textContent = cite;
+    if (cardImage && dialogImage) {
+      dialogImage.src = cardImage.currentSrc || cardImage.src;
+      dialogImage.alt = cardImage.alt;
+      dialogImage.hidden = false;
+    }
     dialog.showModal();
   }
 
