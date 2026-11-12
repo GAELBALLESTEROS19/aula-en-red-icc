@@ -1,0 +1,56 @@
+[
+  {
+    "slug": "correo-electronico",
+    "title": "Correo electrónico",
+    "definition": "Servicio para redactar, enviar y recibir mensajes entre direcciones electrónicas. Permite organizar conversaciones y adjuntar documentos o enlaces; es útil cuando la respuesta no necesita ser inmediata.",
+    "example": "<p class=\"example-label\">Un día en el ICC</p><p>Escribiría desde mi cuenta institucional al docente con el asunto “Duda sobre la Actividad 4”, explicaría una pregunta concreta y adjuntaría el avance del trabajo si fuera necesario.</p>",
+    "practice": "<p class=\"good-practice\"><span aria-hidden=\"true\">↗</span><span><b>Buena práctica:</b> asunto claro, saludo, petición específica y firma con nombre y grupo.</span></p>\n          ",
+    "cite": "El flujo de Gmail contempla destinatarios, asunto, redacción y envío (Google, s. f.-c).",
+    "alt": "Sobre digital tridimensional azul con una carta preparada para enviarse."
+  },
+  {
+    "slug": "mensajeria-instantanea",
+    "title": "Mensajería instantánea",
+    "definition": "Intercambio de mensajes breves en una aplicación conectada a internet. Puede ser individual o grupal y facilita coordinarse en el momento; algunas plataformas también permiten compartir archivos o iniciar llamadas.",
+    "example": "<p class=\"example-label\">Un día en el ICC</p><p>En un chat de equipo acordaría la hora de una reunión, repartiría las partes de una exposición y compartiría el enlace a un documento de trabajo colaborativo.</p>",
+    "practice": "<p class=\"good-practice\"><span aria-hidden=\"true\">↗</span><span><b>Buena práctica:</b> mantener el chat en el tema del curso y no asumir que todos responden al instante.</span></p>\n          ",
+    "cite": "Teams permite conversaciones individuales y grupales, además de llamadas desde el chat (Microsoft, s. f.-a).",
+    "alt": "Burbujas de conversación digitales conectadas para coordinar un equipo académico."
+  },
+  {
+    "slug": "videollamadas",
+    "title": "Videollamadas",
+    "definition": "Conversaciones en tiempo real que transmiten voz y video por internet. Hacen posible reunirse a distancia, conversar cara a cara y, en muchas plataformas, mostrar la pantalla o revisar materiales en conjunto.",
+    "example": "<p class=\"example-label\">Un día en el ICC</p><p>Con mi equipo realizaría una sesión breve para explicar un tema difícil, compartir una diapositiva y resolver dudas antes de entregar una actividad.</p>",
+    "practice": "<p class=\"good-practice\"><span aria-hidden=\"true\">↗</span><span><b>Buena práctica:</b> probar audio y conexión, entrar a tiempo y pedir la palabra con cortesía.</span></p>\n          ",
+    "cite": "Microsoft Teams ofrece llamadas de audio y video individuales o grupales desde un chat (Microsoft, s. f.-b).",
+    "alt": "Pantalla de videollamada con participantes, cámara y recursos compartidos."
+  },
+  {
+    "slug": "redes-sociales",
+    "title": "Redes sociales",
+    "definition": "Plataformas donde las personas crean perfiles o comunidades para compartir información, ideas y contenidos, además de interactuar con otras personas mediante publicaciones, comentarios o grupos.",
+    "example": "<p class=\"example-label\">Un día en el ICC</p><p>Participaría en un grupo académico para intercambiar recursos confiables, comentar estrategias de estudio y compartir avisos del curso, respetando las reglas del espacio.</p>",
+    "practice": "<p class=\"good-practice\"><span aria-hidden=\"true\">↗</span><span><b>Buena práctica:</b> comprobar la fuente antes de compartir y cuidar la privacidad de compañeros.</span></p>\n          ",
+    "cite": "Las redes sociales facilitan crear comunidades y compartir información e ideas (University Marketing and Communications, s. f.).",
+    "alt": "Personas conectadas en una red académica para compartir recursos."
+  },
+  {
+    "slug": "blogs",
+    "title": "Blogs",
+    "definition": "Sitios que reúnen publicaciones o entradas de una persona o equipo. Sus temas pueden organizarse con títulos, fechas y etiquetas; una bitácora bien estructurada permite volver a las ideas y recursos con facilidad.",
+    "example": "<p class=\"example-label\">Un día en el ICC</p><p>Mantendría esta bitácora como cuaderno digital: publicaría síntesis de cada módulo, ejemplos de herramientas, reflexiones breves y referencias que pueda consultar más adelante.</p>",
+    "practice": "<p class=\"good-practice\"><span aria-hidden=\"true\">↗</span><span><b>Buena práctica:</b> actualizar el contenido, organizarlo por temas y dar crédito a las fuentes.</span></p>\n          ",
+    "cite": "Blogger permite crear y gestionar un blog; las etiquetas ayudan a organizar y filtrar publicaciones (Google, s. f.-a; Nieves, 2025).",
+    "alt": "Cuaderno digital abierto con publicaciones organizadas para una bitácora de aprendizaje."
+  },
+  {
+    "slug": "paginas-personales",
+    "title": "Páginas personales",
+    "definition": "Sitios web individuales para presentar información, proyectos, intereses o una trayectoria. A diferencia de un blog —centrado en nuevas entradas—, una página personal suele organizarse en secciones estables y puede funcionar como portafolio.",
+    "example": "<p class=\"example-label\">Un día en el ICC</p><p>Diseñaría una página-portafolio con una presentación, trabajos seleccionados, habilidades digitales y una sección de aprendizajes que pueda ampliar durante mis estudios.</p>",
+    "practice": "<p class=\"good-practice\"><span aria-hidden=\"true\">↗</span><span><b>Buena práctica:</b> compartir solo datos que deseo hacer públicos y revisar los permisos antes de difundir el enlace.</span></p>\n          ",
+    "cite": "Google Sites permite organizar páginas y compartir un sitio con otras personas (Google, s. f.-b).",
+    "alt": "Portafolio digital personal con módulos para mostrar proyectos y trayectoria."
+  }
+]

@@ -1,0 +1,35 @@
+AULA EN RED — EXPERIENCIA EDUCATIVA INMERSIVA
+Autor: Alan Ballesteros · Instituto Consorcio Clavijero
+Sitio: https://gaelballesteros19.github.io/aula-en-red-icc/
+Código: https://github.com/GAELBALLESTEROS19/aula-en-red-icc
+
+ESTRUCTURA
+La portada conecta con seis páginas internas. Cada tema tiene su propio enlace, objeto CSS 3D, definición original, funciones ampliadas, ejemplo ICC, pasos de aplicación y recomendaciones. Las rutas usan # y funcionan en GitHub Pages sin servidor especial. Atrás y Adelante conservan la navegación.
+
+EDICIÓN
+- index.html: todos los textos, referencias y estructura de las siete vistas.
+- aula.css: composición, tipografía, colores, estados y adaptación móvil.
+- objects3d.css: objetos 3D construidos con CSS, caras, profundidad, luz y sombras.
+- aula.js: rutas, subapartados, búsqueda, filtros, recomendaciones y movimiento.
+- assets/: ilustraciones SVG conceptuales conservadas del proyecto.
+- Aula_en_Red.html: copia descriptiva del archivo principal.
+- Aula_en_Red_embed.html: versión autocontenida para incorporar en Google Sites.
+- inventario_contenido.json: registro de las definiciones, ejemplos y citas originales.
+
+Para cambiar el diseño, edita aula.css. Para modificar un objeto, busca el bloque correspondiente en objects3d.css (orbit, mail, chat, video, social, blog o portfolio). La escala se controla con --object-scale y la inclinación con --rx y --ry. No hay bibliotecas externas.
+
+PÁGINAS COMPARTIBLES
+#correo-electronico
+#mensajeria-instantanea
+#videollamadas
+#redes-sociales
+#blogs
+#paginas-personales
+
+CONTENIDO Y ACCESIBILIDAD
+Las seis definiciones, ejemplos, buenas prácticas, citas y nueve referencias originales permanecen. Se añadieron explicaciones documentadas, un selector de propósito, ciudadanía digital y referencias APA. Los casos ICC son escenarios imaginados del autor. El sitio respeta movimiento reducido, permite pausar las animaciones y ofrece foco visible y navegación por teclado.
+
+La referencia visual del video se interpretó mediante una esfera azul, superficies de vidrio y objetos flotantes. El video privado no está incluido en el sitio ni en este paquete.
+
+ABRIR Y PUBLICAR
+Extrae todo el ZIP y abre index.html. Conserva la carpeta assets junto a los archivos. En GitHub Pages, los archivos se sirven desde main y la raíz del repositorio. Para Google Sites utiliza la versión autocontenida y vuelve a publicar desde su editor.
